@@ -143,6 +143,52 @@
 	status = "okay";
 };
 
+&mdss_dsi0 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+	vdda-supply = <&pm8916_l2>;
+	vddio-supply = <&pm8916_l6>;
+	status = "okay";
+
+	ports {
+		port@1 {
+			endpoint {
+				remote-endpoint = <&truly_in>;
+				data-lanes = <0 1 2 3>;
+			};
+		};
+	};
+
+	panel@0 {
+		compatible = "truly,r63350-fhd";
+		reg = <0>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_lcd_rst>;
+		iovcc-supply = <&vreg_lcd_iovcc_reg>;
+		avdd-supply = <&vreg_lcd_avdd_reg>;
+		avee-supply = <&vreg_lcd_avee_reg>;
+		reset-gpios = <&tlmm 25 GPIO_ACTIVE_LOW>;
+		backlight = <&bl>;
+
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port@0 {
+				reg = <0>;
+				truly_in: endpoint {
+					remote-endpoint = <&mdss_dsi0_out>;
+				};
+			};
+		};
+	};
+};
+
+&mdss_dsi0_phy {
+       vddio-supply = <&pm8916_l6>;
+       status = "okay";
+};
+
 &pm8916_codec {
 	qcom,hphl-jack-type-normally-open;
 	qcom,mbhc-vthreshold-low = <75 150 237 450 500>;
