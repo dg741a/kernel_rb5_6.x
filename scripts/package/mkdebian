@@ -146,7 +146,7 @@ if [ "$1" = --need-source ]; then
 fi
 
 # Some variables and settings used throughout the script
-version=$KERNELRELEASE
+version=$(${srctree}/scripts/setlocalversion --no-scm ${srctree})
 if [ -n "$KDEB_PKGVERSION" ]; then
 	packageversion=$KDEB_PKGVERSION
 else

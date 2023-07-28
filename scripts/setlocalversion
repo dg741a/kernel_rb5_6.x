@@ -21,6 +21,12 @@ if test "$1" = "--no-local"; then
 	shift
 fi
 
+no_scm=false
+if test "$1" = "--no-scm"; then
+	no_scm=true
+	shift
+fi
+
 srctree=.
 if test $# -gt 0; then
 	srctree=$1
@@ -153,7 +159,9 @@ fi
 config_localversion=$(sed -n 's/^CONFIG_LOCALVERSION=\(.*\)$/\1/p' include/config/auto.conf)
 
 # scm version string if not at the kernel version tag or at the file_localversion
-if grep -q "^CONFIG_LOCALVERSION_AUTO=y$" include/config/auto.conf; then
+if ${no_scm}; then
+	scm_version=''
+elif grep -q "^CONFIG_LOCALVERSION_AUTO=y$" include/config/auto.conf; then
 	# full scm version string
 	scm_version="$(scm_version)"
 elif [ "${LOCALVERSION+set}" != "set" ]; then
