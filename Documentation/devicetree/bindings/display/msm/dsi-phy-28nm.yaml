@@ -21,11 +21,29 @@ properties:
       - qcom,dsi-phy-28nm-hpm-fam-b
       - qcom,dsi-phy-28nm-lp
 
+  clocks:
+    maxItems: 2
+
+  clock-names:
+    - items:
+        - const: iface
+        - const: ref
+
+  '#clock-cells':
+    const: 1
+
+  "#phy-cells":
+    const: 0
+
   reg:
     items:
       - description: dsi pll register set
       - description: dsi phy register set
       - description: dsi phy regulator register set
+
+  qcom,dsi-phy-regulator-ldo-mode:
+    type: boolean
+    description: Indicates if the LDO mode PHY regulator is wanted.
 
   reg-names:
     items:
@@ -42,6 +60,10 @@ properties:
 
 required:
   - compatible
+  - clocks
+  - clock-names
+  - "#clock-cells"
+  - "#phy-cells"
   - reg
   - reg-names
   - vddio-supply

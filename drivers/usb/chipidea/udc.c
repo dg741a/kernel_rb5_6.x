@@ -2164,8 +2164,7 @@ void ci_hdrc_gadget_destroy(struct ci_hdrc *ci)
 static int udc_id_switch_for_device(struct ci_hdrc *ci)
 {
 	if (ci->platdata->pins_device)
-		pinctrl_select_state(ci->platdata->pctl,
-				     ci->platdata->pins_device);
+		ci_platform_set_pin_state(ci, ci->platdata->pins_device);
 
 	if (ci->is_otg)
 		/* Clear and enable BSV irq */
@@ -2187,8 +2186,7 @@ static void udc_id_switch_for_host(struct ci_hdrc *ci)
 	ci->vbus_active = 0;
 
 	if (ci->platdata->pins_device && ci->platdata->pins_default)
-		pinctrl_select_state(ci->platdata->pctl,
-				     ci->platdata->pins_default);
+		ci_platform_set_pin_state(ci, ci->platdata->pins_default);
 }
 
 #ifdef CONFIG_PM_SLEEP
