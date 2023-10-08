@@ -57,7 +57,7 @@ static const struct dpu_sspp_cfg sc7280_sspp[] = {
 	{
 		.name = "sspp_0", .id = SSPP_VIG0,
 		.base = 0x4000, .len = 0x1f8,
-		.features = VIG_SC7280_MASK_SDMA,
+		.features = VIG_SC7280_MASK,
 		.sblk = &sc7280_vig_sblk_0,
 		.xin_id = 0,
 		.type = SSPP_TYPE_VIG,
@@ -65,7 +65,7 @@ static const struct dpu_sspp_cfg sc7280_sspp[] = {
 	}, {
 		.name = "sspp_8", .id = SSPP_DMA0,
 		.base = 0x24000, .len = 0x1f8,
-		.features = DMA_SDM845_MASK_SDMA,
+		.features = DMA_SDM845_MASK,
 		.sblk = &sdm845_dma_sblk_0,
 		.xin_id = 1,
 		.type = SSPP_TYPE_DMA,
@@ -73,7 +73,7 @@ static const struct dpu_sspp_cfg sc7280_sspp[] = {
 	}, {
 		.name = "sspp_9", .id = SSPP_DMA1,
 		.base = 0x26000, .len = 0x1f8,
-		.features = DMA_CURSOR_SDM845_MASK_SDMA,
+		.features = DMA_CURSOR_SDM845_MASK,
 		.sblk = &sdm845_dma_sblk_1,
 		.xin_id = 5,
 		.type = SSPP_TYPE_DMA,
@@ -81,7 +81,7 @@ static const struct dpu_sspp_cfg sc7280_sspp[] = {
 	}, {
 		.name = "sspp_10", .id = SSPP_DMA2,
 		.base = 0x28000, .len = 0x1f8,
-		.features = DMA_CURSOR_SDM845_MASK_SDMA,
+		.features = DMA_CURSOR_SDM845_MASK,
 		.sblk = &sdm845_dma_sblk_2,
 		.xin_id = 9,
 		.type = SSPP_TYPE_DMA,
