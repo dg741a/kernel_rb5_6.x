@@ -524,6 +524,7 @@
 
 &usb_dwc3 {
 	maximum-speed = "super-speed";
+	dr_mode = "host";
 };
 
 &usb_hsphy {
