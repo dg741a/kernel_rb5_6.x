@@ -1573,7 +1573,6 @@
 			interconnect-names = "usb-ddr",
 					     "apps-usb";
 
-			qcom,select-utmi-as-pipe-clk;
 			status = "disabled";
 
 			usb_dwc3: usb@4e00000 {
@@ -1588,6 +1587,8 @@
 				snps,has-lpm-erratum;
 				snps,hird-threshold = /bits/ 8 <0x10>;
 				snps,usb3_lpm_capable;
+				maximum-speed = "super-speed";
+				dr_mode = "otg";
 				usb-role-switch;
 
 				port {
