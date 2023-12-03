@@ -514,7 +514,7 @@ static int mdss_remove(struct platform_device *pdev)
 static const struct msm_mdss_data msm8998_data = {
 	.ubwc_enc_version = UBWC_1_0,
 	.ubwc_dec_version = UBWC_1_0,
-	.highest_bank_bit = 1,
+	.highest_bank_bit = 2,
 	.reg_bus_bw = 76800 * 1000,
 };
 
