@@ -102,4 +102,5 @@ examples:
                            <90 260>,
                            <91 260>;
         qcom,rpm-msg-ram = <&apss_mpm>;
+        #power-domain-cells = <0>;
     };
