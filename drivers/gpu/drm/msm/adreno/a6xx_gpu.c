@@ -1295,7 +1295,7 @@ static void a6xx_set_ubwc_config(struct msm_gpu *gpu)
 
 	if (adreno_is_a610(adreno_gpu)) {
 		/* HBB = 14 */
-		hbb_lo = 1;
+		hbb_lo = 0;
 		min_acc_len = 1;
 		ubwc_mode = 1;
 	}
