@@ -232,6 +232,21 @@
 		regulator-always-on;
 	};
 
+	vreg_gsm: gsm-regulator {
+		compatible = "regulator-fixed";
+
+		regulator-name = "gsm-reg";
+		regulator-min-microvolt = <4000000>;
+		regulator-max-microvolt = <4000000>;
+		regulator-always-on;
+		regulator-boot-on;
+		gpio = <&tlmm 8 GPIO_ACTIVE_HIGH>;
+		enable-active-high;
+
+		pinctrl-names = "default";
+		pinctrl-0 = <&gsm_en_state>;
+	};
+
 	qca639x: qca639x {
 		compatible = "qcom,qca6390";
 		#power-domain-cells = <0>;
@@ -710,21 +725,21 @@
 &pcie1 {
 	status = "okay";
 	iommu-map = <0x0 &apps_smmu 0x1c80 0x1>,
-            <0x100 &apps_smmu 0x1c81 0x1>,
-            <0x200 &apps_smmu 0x1c82 0x1>,
-            <0x300 &apps_smmu 0x1c83 0x1>,
-            <0x400 &apps_smmu 0x1c84 0x1>,
-            <0x500 &apps_smmu 0x1c85 0x1>,
-            <0x600 &apps_smmu 0x1c86 0x1>,
-            <0x700 &apps_smmu 0x1c87 0x1>,
-            <0x800 &apps_smmu 0x1c88 0x1>,
-            <0x900 &apps_smmu 0x1c89 0x1>,
-            <0xa00 &apps_smmu 0x1c8a 0x1>,
-            <0xb00 &apps_smmu 0x1c8b 0x1>,
-            <0xc00 &apps_smmu 0x1c8c 0x1>,
-            <0xd00 &apps_smmu 0x1c8d 0x1>,
-            <0xe00 &apps_smmu 0x1c8e 0x1>,
-            <0xf00 &apps_smmu 0x1c8f 0x1>;
+            	<0x100 &apps_smmu 0x1c81 0x1>,
+            	<0x200 &apps_smmu 0x1c82 0x1>,
+            	<0x300 &apps_smmu 0x1c83 0x1>,
+            	<0x400 &apps_smmu 0x1c84 0x1>,
+            	<0x500 &apps_smmu 0x1c85 0x1>,
+            	<0x600 &apps_smmu 0x1c86 0x1>,
+            	<0x700 &apps_smmu 0x1c87 0x1>,
+            	<0x800 &apps_smmu 0x1c88 0x1>,
+            	<0x900 &apps_smmu 0x1c89 0x1>,
+            	<0xa00 &apps_smmu 0x1c8a 0x1>,
+            	<0xb00 &apps_smmu 0x1c8b 0x1>,
+            	<0xc00 &apps_smmu 0x1c8c 0x1>,
+            	<0xd00 &apps_smmu 0x1c8d 0x1>,
+            	<0xe00 &apps_smmu 0x1c8e 0x1>,
+            	<0xf00 &apps_smmu 0x1c8f 0x1>;
 };
 
 &pcie1_phy {
@@ -735,6 +750,23 @@
 
 &pcie2 {
 	status = "okay";
+	iommu-map = <0x0   &apps_smmu 0x1d00 0x1>,
+				<0x100 &apps_smmu 0x1d01 0x1>,
+				<0x200 &apps_smmu 0x1d02 0x1>,
+				<0x300 &apps_smmu 0x1d03 0x1>,
+				<0x400 &apps_smmu 0x1d04 0x1>,
+				<0x500 &apps_smmu 0x1d05 0x1>,
+				<0x600 &apps_smmu 0x1d06 0x1>,
+				<0x700 &apps_smmu 0x1d07 0x1>,
+				<0x800 &apps_smmu 0x1d08 0x1>,
+				<0x900 &apps_smmu 0x1d09 0x1>,
+				<0xa00 &apps_smmu 0x1d0a 0x1>,
+				<0xb00 &apps_smmu 0x1d0b 0x1>,
+				<0xc00 &apps_smmu 0x1d0c 0x1>,
+				<0xd00 &apps_smmu 0x1d0d 0x1>,
+				<0xe00 &apps_smmu 0x1d0e 0x1>,
+				<0xf00 &apps_smmu 0x1d0f 0x1>;
+
 };
 
 &pcie2_phy {
@@ -1036,7 +1068,7 @@
 
 /* CAN */
 &spi0 {
-	status = "okay";
+	status = "disable";
 	pinctrl-names = "default";
 	pinctrl-0 = <&qup_spi0_data_clk>, <&qup_spi0_cs_gpio>;
 	cs-gpios = <&tlmm 31 GPIO_ACTIVE_LOW>;
@@ -1053,7 +1085,7 @@
 };
 
 &swr0 {
-	status = "okay";
+	status = "disable";
 
 	left_spkr: speaker@0,3 {
 		compatible = "sdw10217211000";
@@ -1266,6 +1298,17 @@
 			drive-strength = <16>;
 			output-low;
 			bias-pull-up;
+		};
+	};
+
+	gsm_en_state: gsm-default-state {
+		gsm-en {
+			pins = "gpio8";
+			function = "gpio";
+
+			drive-strength = <16>;
+			output-high;
+			bias-disable;
 		};
 	};
 
