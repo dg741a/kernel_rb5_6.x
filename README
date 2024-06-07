@@ -20,12 +20,16 @@ the problems which may result by upgrading your kernel.
 
 
 =============================================
-
-1   apt-get install make
+Ubuntu 22.04.4 LTS:
+1   apt-get install make mkbootimg gcc libncurses-dev flex bison
 2   cd ~/gcc
     wget https://developer.arm.com/-/media/Files/downloads/gnu-a/10.2-2020.11/binrel/gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu.tar.xz
     tar -xf gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu.tar.xz
     mv gcc-arm-10.2-2020.11-x86_64-aarch64-none-linux-gnu 10.2
 3   git clone https://github.com/dg741a/kernel_rb5_6.x
-4   ./make.sh
+4   cp config-6.6 .config
+    export ARCH=arm64
+    export CROSS_COMPILE=~/gcc/10.2/bin/aarch64-none-linux-gnu-
+    make menuconfig
+5   ./make.sh
     
